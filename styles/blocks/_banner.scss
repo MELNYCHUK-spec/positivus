@@ -1,0 +1,49 @@
+.banner {
+    --bannerImageOffsetY: 24px; // переменная смещения (offset) картинки  из макета баннера по вертикали
+    padding-block: var(
+        --bannerImageOffsetY
+    ); //компенсируем offset изображения по вертикали,используя внешний отступ banner,
+    // для соблюдения отступов между блоками services__list и services__banner
+
+    @include tablet {
+        --bannerImageOffsetX: 0; // обнуляем переменную внешнего смещения (внешний отступ)
+    }
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--color-gray);
+        border-radius: var(--border-radius-large);
+    }
+
+    &__body {
+        padding: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        row-gap: 26px;
+
+        @include tablet { //0-1023px
+            padding: 50px;
+        }
+
+        @include mobile{
+          row-gap: 20px;
+        }
+    }
+
+    &__description {
+        max-width: 500px;
+    }
+    &__image {
+        margin-block: calc(
+            var(--bannerImageOffsetY) * -1
+        ); //для выпирания картинки использовали отрицательный внешний отступ
+
+        @include tablet {
+            max-width: 40%;
+            height: auto;
+        }
+    }
+}

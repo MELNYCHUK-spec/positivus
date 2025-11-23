@@ -1,0 +1,9 @@
+.frame-bg {
+    padding-inline: 7px;
+    background: var(--color-accent);
+    border-radius: var(--border-radius-small);
+
+    &--light{
+        background: var(--color-light);
+    }
+}

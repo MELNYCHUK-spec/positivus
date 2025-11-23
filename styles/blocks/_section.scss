@@ -1,0 +1,46 @@
+.section {
+    padding-block: var(--section-padding-y);
+    // задали внутренние отступы секций контента 70px со стороны каждого блока=140px -- расстояние между блоками
+
+    &--hidden-x {
+        overflow-x: hidden; // убираем горизонтальный скролл у первой секции изза выпирающих логотипов компаний
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        column-gap: 40px;
+
+        @include mobile{
+            flex-direction: column;
+            row-gap: 30px;
+            text-align: center;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 80px;
+
+            @include mobile{
+                margin-bottom: 40px;
+            }
+        }
+    }
+    &__description {
+        max-width: 580px;
+    }
+
+    &--small{
+        max-width:292px;
+        @include mobile{
+            max-width: 390px;
+        }
+    }
+
+    &--medium{
+        max-width:323px;
+    }
+
+    &--big{
+        max-width: 473px;
+    }
+}

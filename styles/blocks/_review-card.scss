@@ -1,0 +1,56 @@
+.review-card {
+    --reviewCardCornerWidth:40px; // переменная ширины псевдоэлемента review-card__body::after (нижний угол)
+    --reviewCardCornerOffsetLeft:52px; // переменная абсолютного смещения влево псевдоэлемента review-card__body::after (нижний угол)
+    display: flex;
+    flex-direction: column;
+    row-gap: 48px;
+    @include mobile { //0-767
+        row-gap:44px; // уменьшаем отступ между карточкой .review-card__body и .review-card__footer
+        --reviewCardCornerWidth:32px; // уменьшили размер псевдоэлемента review-card__body::after (нижний угол)
+        --reviewCardCornerOffsetLeft:46px; // уменьшили смещение псевдоэлемента
+    }
+
+    &__body {
+        position: relative;
+        padding: 48px var(--reviewCardCornerOffsetLeft) 52px; // используем переменнную смещения влево псевдоэлемента review-card__body::after (нижний угол) для синхронизации внутреннеого отступа у родительского элемента и псевдоэлемента
+        border: 1px solid var(--color-accent);
+        border-radius: var(--border-radius-large);
+
+        @include mobile {
+            padding:30px; // уменьшили внутренний отступ карточки согласно моб. версии макета
+        }
+
+        &::after {
+            // делаем нижний угол review-card__body
+            content: '';
+            position: absolute;
+            @include square(var(--reviewCardCornerWidth));
+            background-color: var(--color-dark);
+            border: inherit;
+            rotate: 45deg;
+            top: 100%;
+            left: var(--reviewCardCornerOffsetLeft);
+            translate: 0 -50%; // смещение по оси x, смещение по оси y
+            clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+        }
+    }
+
+    &__footer {
+        display: flex;
+        flex-direction: column;
+      //внутренний отступ review-card__footer для того,чтобы элементы review-card__name и review-card__company были под нижним уголком (псевдоэлементом)
+        padding-left:calc(
+                var(--reviewCardCornerOffsetLeft) +
+                var(--reviewCardCornerWidth) / 2
+        );
+    }
+
+    &__name {
+        color: var(--color-accent);
+    }
+
+    &__name,
+    &__company {
+        font-style: normal;
+    }
+}

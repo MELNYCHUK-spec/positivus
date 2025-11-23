@@ -1,0 +1,85 @@
+.reviews {
+    display: flex;
+    flex-direction: column;
+    row-gap: 110px;// значение уменьшено на 14 px из-за того,что reviews__arrow-button были увеличены с 20px до 48px,размер сверху и снизу больше на 14px, отступ уменьшили (124-14=110)
+    padding-top:84px;
+    padding-bottom:54px;// значение уменьшено на 14 px из-за того,что были увеличены с 20px до 48px,размер сверху и снизу больше на 14px, отступ уменьшили (68-14=54)
+    color: var(--color-light);
+    background: var(--color-dark);
+    border-radius: var(--border-radius-large);
+    overflow-x: hidden; // спрятали выпирающий контент
+
+    @include tablet{ //0-1023
+        padding-inline:30px; // задали отступ горизонтальный внутренний для блока reviews для того,чтобы слайдер не прилипал к краям
+        padding-top:30px;
+        padding-bottom:46px; //значение уменьшено на 14 px из-за того,что reviews__arrow-button были увеличены с 20px до 48px,размер сверху и снизу больше на 14px,  внутренний отступ уменьшили (60-14=46)
+        row-gap:46px; //значение уменьшено на 14 px из-за того,что reviews__arrow-button были увеличены с 20px до 48px,размер сверху и снизу больше на 14px, отступ уменьшили (60-14=46)
+    }
+
+    &__slider {
+        --reviewsSliderSlideWidth: 606px; // ширина слайда в слайдере
+
+        @include tablet{ // 0-1023
+            --reviewsSliderSlideWidth: 330px; // уменьшили ширину слайда согласно моб версии макета
+        }
+        &-list {
+            display: flex;
+            column-gap: 50px;
+            scroll-snap-type: x mandatory;
+            //scroll-snap-type — это CSS-свойство, используемое для управления поведением прокрутки в контейнере.
+            // Значение x mandatory означает следующее:
+            //x: Указывает, что привязка происходит по горизонтальной оси. Это значит, что при прокрутке элементы будут "прилипать" к заранее заданным точкам вдоль горизонтальной оси.
+            //mandatory: Указывает, что прокрутка будет принудительно останавливаться на ближайшей точке привязки.
+            overflow-x:scroll;
+            //Свойство CSS overflow-x: scroll; управляет горизонтальной прокруткой содержимого элемента.
+            // Оно заставляет браузер отображать горизонтальную полосу прокрутки, даже если содержимое в данный момент умещается в пределах видимой области.
+            //Основные моменты:
+            // overflow-x управляет прокруткой только по горизонтальной оси. Значение scroll означает, что полоса прокрутки всегда будет видимой, даже если прокрутка не требуется.
+
+            @include tablet-above{ // для mobile-first 1024 и выше
+                margin-left:calc(var(--ReviewsSlidderSlideWidth) / 2 * -1);
+                // формула смешает в обратную сторону слайд на значение равное половине ширины слайда (внешний отступ слева)
+            }
+
+            @include tablet{ //0-1023
+                column-gap:30px; // уменьшаем горизонтальный отступ между слайдами
+            }
+        }
+
+        &-item{
+            min-width: var(--reviewsSliderSlideWidth);
+            scroll-snap-align: start;
+            //Свойство scroll-snap-align в CSS определяет, как элемент внутри контейнера привязки (с включённым scroll-snap-type) выравнивается относительно точки привязки при прокрутке.
+            //Значение start указывает, что элемент должен быть выровнен по началу (левому или верхнему краю) контейнера при остановке прокрутки.
+        }
+    }
+
+    &__actions{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width:564px;
+        margin-inline:auto;
+    }
+
+    &__arrow-button {
+        @extend .reset-button;
+        @include flex-center;
+        @include square (48px); //размер кнопки 48px
+        color:var(--color-light);
+
+        @include hover{
+            color:var(--color-accent);
+        }
+
+        &[disabled]{
+            color: var(--color-gray-alt);
+            cursor: not-allowed;
+        }
+
+        svg{
+            @include square (20px); // размер иконки 20px по макету
+        }
+    }
+}

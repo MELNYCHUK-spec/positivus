@@ -1,0 +1,70 @@
+.contact-us{
+  position: relative;
+  overflow-x: hidden; ////cкрываем часть изображения по оси Х
+
+  @include mobile-above{ //для mobile-first 767 и выше (задаем свойства десктоп версии в данном медиазапросе)
+    padding:60px 100px 80px;
+    background-color: var(--color-gray);
+    border-radius: var(--border-radius-large);
+  }
+
+  &::after{
+    --contactUsImageOffsetY:62px; //создали переменную для задания отступов для изображения
+    content: "";
+    position: absolute;
+    top:50%;
+    left:100%;
+    transform: translate(-50%,-50%);
+    height:calc(100% - var(--contactUsImageOffsetY) * 2); // расчет высоты изображения с учетом отступов по вертикали
+    aspect-ratio: 1;
+    background:url("../../images/contact-us/contact-us-bg.svg")
+    center/contain no-repeat;
+
+    @include tablet{ //для desktop-first 0-1023
+      display:none; // убираем картинку
+    }
+
+  }
+  &__form,
+  &__body{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__request-types,
+  &__body{
+    @include mobile{ //для desktop-first  0-767px
+      background-color: var(--color-gray);
+    }
+  }
+
+  &__request-types{
+    @include mobile{
+      padding:40px 52px 36px;
+      border-radius:var(--border-radius-large) var(--border-radius-large) 0 0;
+    }
+  }
+
+
+
+  &__form{
+    @include tablet-above{
+      max-width: 556px; // для mobile-first 1024 и выше
+    }
+
+    @include mobile-above{ // для mobile-first 767 и выше
+      row-gap:40px;
+    }
+  }
+
+  &__body{
+    row-gap:25px;
+
+    @include mobile{
+      padding:10px 30px 50px;
+      border-radius: 0 0 var(--border-radius-large) var(--border-radius-large);
+      margin-bottom: 30px;
+      row-gap:20px;
+    }
+  }
+}

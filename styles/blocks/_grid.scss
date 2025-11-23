@@ -1,0 +1,32 @@
+.grid {
+    --gridColumns: 1;
+    display: grid;
+    grid-template-columns: repeat(var(--gridColumns), 1fr);
+    gap: 40px;
+
+    @include mobile {
+        gap:30px; //уменьшили отступы грид сетки для services__list для 0-767px
+    }
+
+    @for $i from 2 through 12 {  // цикл для создания грид сетки через SSAS переменную от 1 до 12
+        &--#{$i} { //Динамические классы:Для каждого значения переменной $i, создаётся класс с названием --$i (например, &--2, &--3 и так далее).
+            --gridColumns: #{$i};
+        }
+    }
+
+    &--2{
+        @include tablet{
+            --gridColumns: 1; //изменили грид переменную для 0-1023px для services__list c 2 колонок на 1 колонку
+        }
+    }
+
+    &--3{
+        @include desktop{
+            --gridColumns: 2;
+        }
+
+        @include mobile{
+            --gridColumns: 1;
+        }
+    }
+}
